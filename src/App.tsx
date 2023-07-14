@@ -1,12 +1,12 @@
-// import React from 'react'
+import React from "react";
 import "./App.css";
 import ConfigForm from "./ConfigForm";
 
 function App() {
   return (
-    <>
+    <div>
       <ConfigForm />
-    </>
+    </div>
   );
 }
 
