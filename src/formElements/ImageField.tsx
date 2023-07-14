@@ -1,12 +1,12 @@
 import { Field } from "../types";
-interface TimeFieldProps {
+interface ImageFieldProps {
   field: Field;
   value: string;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }
-const ImageField = ({ field, value, onChange }: TimeFieldProps) => {
+const ImageField = ({ field, value, onChange }: ImageFieldProps) => {
   return (
     <label htmlFor={field.name}>
       {field.name}
@@ -17,6 +17,7 @@ const ImageField = ({ field, value, onChange }: TimeFieldProps) => {
         name={field.id}
         accept="image/*"
         value={value}
+        required
         onChange={onChange}
       />
     </label>

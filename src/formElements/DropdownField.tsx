@@ -1,12 +1,12 @@
 import { Field } from "../types";
-interface TimeFieldProps {
+interface DropdownFieldProps {
   field: Field;
   value: string;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }
-const DropdownField = ({ field }: TimeFieldProps) => {
+const DropdownField = ({ field }: DropdownFieldProps) => {
   return (
     <>
       <p>{field.description}</p>

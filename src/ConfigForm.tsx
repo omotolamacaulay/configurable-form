@@ -14,6 +14,7 @@ import VideoField from "./formElements/VideoField";
 import ImageField from "./formElements/ImageField";
 import UploadField from "./formElements/UploadField";
 import DropdownField from "./formElements/DropdownField";
+import IntegerField from "./formElements/IntegerField";
 
 const ConfigForm = () => {
   const [urlLink, setUrlLink] = useState<string>("");
@@ -23,20 +24,20 @@ const ConfigForm = () => {
 
   const jsonObj = {
     audio_attestation: "",
-    date_of_birth: "",
+    date_of_birth: "25/12/2020",
     document_options: "",
     drink_options: "",
-    email: "",
+    email: "email@email.com",
     food_options: "",
     identity_document: "",
-    name_of_student: "Sola Sola",
+    name_of_student: "Sola Ara",
     number_of_siblins: "",
     phone_number: "0807865432",
-    reason_for_loan: "",
-    resumption_date: "",
-    salary_of_dad: "",
+    reason_for_loan: "Sapa",
+    resumption_date: "01/08/2023",
+    salary_of_dad: "22000",
     student_selfie: "",
-    time_of_day: "",
+    time_of_day: "02:22",
     video_attestation: "",
   };
 
@@ -160,7 +161,7 @@ const ConfigForm = () => {
             setFormValues(jsonObj);
           }}
         >
-          fill form
+          Fill form
         </button>
         {Object.keys(form).length === 0 ? (
           <h2>No fetch</h2>
@@ -218,7 +219,7 @@ const ConfigForm = () => {
                         />
                       )}
                       {field.type === "integer" && (
-                        <NumberField
+                        <IntegerField
                           field={field}
                           value={formValues[field.id] || ""}
                           onChange={handleChange}
