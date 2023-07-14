@@ -17,7 +17,7 @@ import DropdownField from "./formElements/DropdownField";
 
 const ConfigForm = () => {
   const [urlLink, setUrlLink] = useState<string>("");
-  const [jsonData, setJsonData] = useState({});
+  const [jsonData, setJsonData] = useState("");
   const [form, setForm] = useState({} as FormData);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
 
@@ -58,13 +58,14 @@ const ConfigForm = () => {
   }
 
   const getJsonData = function () {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data: FormData = JSON.parse(jsonData);
     setForm(data);
     fillTheForm(data);
   };
 
-  const fillTheForm = function (data) {
-    const dataObject = {};
+  const fillTheForm = function (data: FormData) {
+    const dataObject: Record<string, unknown> = {};
     data.pages.map((page) => {
       page.sections.map((section) => {
         section.fields.map((field) => {
