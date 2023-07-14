@@ -15,6 +15,9 @@ const TextAreaField = ({ field, value, onChange }: TextareaFieldProps) => {
         id={field.id}
         name={field.id}
         value={value}
+        minLength={10}
+        maxLength={1000}
+        required
         onChange={onChange}
       />
     </label>

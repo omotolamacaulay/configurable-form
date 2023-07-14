@@ -20,6 +20,7 @@ const CheckboxField = ({ field, value, onChange }: TimeFieldProps) => {
               name={option.id}
               value={value}
               onChange={onChange}
+              required
             />
           </div>
         ))}

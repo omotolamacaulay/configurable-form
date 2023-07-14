@@ -17,6 +17,7 @@ const VideoField = ({ field, value, onChange }: TimeFieldProps) => {
         name={field.id}
         accept="video/*"
         value={value}
+        required
         onChange={onChange}
       />
     </label>

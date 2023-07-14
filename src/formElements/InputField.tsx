@@ -14,6 +14,9 @@ const InputField = ({ field, value, onChange }: InputFieldProps) => {
         id={field.id}
         name={field.id}
         value={value}
+        required
+        minLength={10}
+        maxLength={256}
         onChange={onChange}
       />
     </label>

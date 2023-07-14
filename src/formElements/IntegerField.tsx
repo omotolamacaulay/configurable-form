@@ -1,12 +1,12 @@
 import { Field } from "../types";
-interface NumberFieldProps {
+interface IntegerFieldProps {
   field: Field;
   value: string;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }
-const NumberField = ({ field, value, onChange }: NumberFieldProps) => {
+const IntegerField = ({ field, value, onChange }: IntegerFieldProps) => {
   return (
     <label htmlFor={field.name}>
       {field.name}
@@ -17,12 +17,12 @@ const NumberField = ({ field, value, onChange }: NumberFieldProps) => {
         name={field.id}
         value={value}
         onChange={onChange}
-        step="0.01"
-        min="0"
-        max="0.99"
+        required
+        min={0}
+        max={10}
       />
     </label>
   );
 };
 
-export default NumberField;
+export default IntegerField;

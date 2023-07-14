@@ -1,12 +1,12 @@
 import { Field } from "../types";
-interface TimeFieldProps {
+interface PhoneFieldProps {
   field: Field;
   value: string;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }
-const PhoneField = ({ field, value, onChange }: TimeFieldProps) => {
+const PhoneField = ({ field, value, onChange }: PhoneFieldProps) => {
   return (
     <label htmlFor={field.name}>
       {field.name}
@@ -17,6 +17,7 @@ const PhoneField = ({ field, value, onChange }: TimeFieldProps) => {
         name={field.id}
         value={value}
         onChange={onChange}
+        required
       />
     </label>
   );

@@ -1,12 +1,12 @@
 import { Field } from "../types";
-interface TimeFieldProps {
+interface UploadFieldProps {
   field: Field;
   value: string;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
 }
-const UploadField = ({ field, value, onChange }: TimeFieldProps) => {
+const UploadField = ({ field, value, onChange }: UploadFieldProps) => {
   return (
     <label htmlFor={field.name}>
       {field.name}
@@ -18,6 +18,7 @@ const UploadField = ({ field, value, onChange }: TimeFieldProps) => {
         accept=".doc, .docx, .png, .pdf, .jpg, .jpeg, .tiff"
         value={value}
         onChange={onChange}
+        required
       />
     </label>
   );

@@ -17,6 +17,7 @@ const ImageField = ({ field, value, onChange }: TimeFieldProps) => {
         name={field.id}
         accept="image/*"
         value={value}
+        required
         onChange={onChange}
       />
     </label>
