@@ -1,9 +1,16 @@
-export interface Meta {
+export interface Meta extends FormData {
   name: string;
   description: string;
   version: string;
   url: string;
   status: "active" | "inactive";
+}
+
+export interface Field {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
 }
 
 export interface Action {
@@ -23,16 +30,16 @@ export interface Validation {
   allowed?: string;
 }
 
-export interface Option {
+export interface Option extends Field {
   id: string;
   label: string;
   value: string;
 }
 
-export interface Field {
+export interface Field extends FormData {
   id: string;
   name: string;
-  type:
+  kind:
     | "short_text"
     | "long_text"
     | "date"

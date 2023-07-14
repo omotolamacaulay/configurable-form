@@ -1,10 +1,54 @@
 import { useState } from "react";
 import { FormData } from "./types";
+import InputField from "./formElements/InputField";
+import TextAreaField from "./formElements/TextAreaField";
+import DateField from "./formElements/DateField";
+import TimeField from "./formElements/TimeField";
+import NumberField from "./formElements/NumberField";
+import PhoneField from "./formElements/PhoneField";
+import EmailField from "./formElements/EmailField";
+import CheckboxField from "./formElements/CheckboxField";
+import RadioField from "./formElements/RadioField";
+import AudioField from "./formElements/AudioField";
+import VideoField from "./formElements/VideoField";
+import ImageField from "./formElements/ImageField";
+import UploadField from "./formElements/UploadField";
+import DropdownField from "./formElements/DropdownField";
 
-export const ConfigForm = () => {
+const ConfigForm = () => {
   const [urlLink, setUrlLink] = useState<string>("");
   const [jsonData, setJsonData] = useState({});
   const [form, setForm] = useState({} as FormData);
+  const [formValues, setFormValues] = useState<Record<string, string>>({});
+
+  const jsonObj = {
+    audio_attestation: "",
+    date_of_birth: "",
+    document_options: "",
+    drink_options: "",
+    email: "",
+    food_options: "",
+    identity_document: "",
+    name_of_student: "Sola Sola",
+    number_of_siblins: "",
+    phone_number: "0807865432",
+    reason_for_loan: "",
+    resumption_date: "",
+    salary_of_dad: "",
+    student_selfie: "",
+    time_of_day: "",
+    video_attestation: "",
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
 
   async function getUrl() {
     const res = await fetch(urlLink);
@@ -13,537 +57,58 @@ export const ConfigForm = () => {
     setForm(data);
   }
 
-  //   useEffect(() => {
-  //     setForm({
-  //       meta: {
-  //         name: "Lendsqr sample education loan form",
-
-  //         Description: "Education loan for secondary schools",
-
-  //         version: "1.0",
-
-  //         url: "https://lendsqr.com/education.html",
-
-  //         status: "active | inactive",
-  //       },
-
-  //       pages: [
-  //         {
-  //           name: "School information",
-
-  //           title: "School information",
-
-  //           description:
-  //             "Please provide the information for the school you are paying for",
-
-  //           actions: [
-  //             {
-  //               type: "continue",
-
-  //               label: "Next page",
-  //             },
-
-  //             {
-  //               type: "cancel",
-
-  //               label: "Cancel",
-
-  //               message:
-  //                 "If you cancel this, all your breads would be buttered. Are you sure you want to do this?",
-  //             },
-  //           ],
-
-  //           sections: [
-  //             {
-  //               name: "Student details",
-
-  //               description:
-  //                 "Provide the details of the student for which this loan is being taken.",
-
-  //               fields: [
-  //                 {
-  //                   id: "name_of_student",
-
-  //                   name: "Name of student",
-
-  //                   type: "short_text",
-
-  //                   label: "Student name",
-
-  //                   description:
-  //                     "Provide the name of the student as registered in the school or the birth certificate",
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     minimum: "10",
-
-  //                     maximum: "256",
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "reason_for_loan",
-
-  //                   name: "Reason for loan",
-
-  //                   type: "long_text",
-
-  //                   label: "Why do you need this loan",
-
-  //                   description:
-  //                     "Kindly provide a justification for why this loan is required",
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     minimum: "10",
-
-  //                     maximum: "1000",
-
-  //                     number_of_lines: 3,
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "date_of_birth",
-
-  //                   name: "Date of birth",
-
-  //                   type: "date",
-
-  //                   label: "Date of birth",
-
-  //                   description:
-  //                     "Provide the date of birth of the student as contained in an ID or birth certificate",
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     minimum: "100 years before",
-
-  //                     maximum: "12 years before",
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "time_of_day",
-
-  //                   name: "Time of day",
-
-  //                   type: "time",
-
-  //                   label: "Wake up time",
-
-  //                   description: "What time in the day does your child wake up?",
-
-  //                   validation: {
-  //                     required: false,
-
-  //                     minimum: "5 minutes before",
-
-  //                     maximum: "12 hours after",
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "resumption_date",
-
-  //                   name: "Resumption date",
-
-  //                   type: "date_time",
-
-  //                   label: "Resumption date",
-
-  //                   description:
-  //                     "What specific date and time would your child be delivered to the school?",
-
-  //                   validation: {
-  //                     required: false,
-
-  //                     minimum: "100 years before",
-
-  //                     maximum: "12 years before",
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "number_of_siblins",
-
-  //                   name: "Number of siblings",
-
-  //                   type: "integer",
-
-  //                   label: "Number of siblings",
-
-  //                   description:
-  //                     "How many siblings does the grand-father of your mother's uncle have?",
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     minimum: "0",
-
-  //                     maximum: "10",
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "salary_of_dad",
-
-  //                   name: "Salary of parents",
-
-  //                   type: "number",
-
-  //                   label: "Salary of parents",
-
-  //                   description:
-  //                     "Provide, to the exact amount, the amount that your dad earned last month",
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     minimum: "0",
-
-  //                     maximum: "999999999",
-
-  //                     decimal_points: 2,
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "phone_number",
-
-  //                   name: "Phone",
-
-  //                   type: "phone",
-
-  //                   label: "Mobile",
-
-  //                   description: "",
-
-  //                   validation: {
-  //                     required: true,
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "email",
-
-  //                   name: "Email of parents",
-
-  //                   type: "email",
-
-  //                   label: "Email of neigbors",
-
-  //                   description:
-  //                     "What's the email of your neighbor that sits across the pond?",
-
-  //                   validation: {
-  //                     required: true,
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "food_options",
-
-  //                   name: "Food options",
-
-  //                   type: "checkbox",
-
-  //                   label: "What food options do you want",
-
-  //                   description: "Select all the options that come to your mind",
-
-  //                   options: [
-  //                     {
-  //                       id: "afro",
-
-  //                       label: "Afolabi",
-
-  //                       value: "123",
-  //                     },
-
-  //                     {
-  //                       id: "afrolab",
-
-  //                       label: "Afolabi",
-
-  //                       value: "123",
-  //                     },
-  //                   ],
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     minimum_select: 1,
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "drink_options",
-
-  //                   name: "Drink options",
-
-  //                   type: "radio",
-
-  //                   label: "What drink options do you want",
-
-  //                   description:
-  //                     "Select all the options that you want to take but your mum won't allow",
-
-  //                   options: [
-  //                     {
-  //                       id: "afro",
-
-  //                       label: "Afolabi",
-
-  //                       value: "123",
-  //                     },
-
-  //                     {
-  //                       id: "afrolab",
-
-  //                       label: "Afolabi",
-
-  //                       value: "123",
-  //                     },
-  //                   ],
-
-  //                   validation: {
-  //                     required: false,
-  //                   },
-  //                 },
-  //               ],
-  //             },
-  //           ],
-  //         },
-
-  //         {
-  //           name: "Multi-media content",
-
-  //           title: "Multimedia information",
-
-  //           description:
-  //             "You would need to record and upload videos and documents",
-
-  //           actions: [
-  //             {
-  //               type: "submit",
-
-  //               label: "Submit Loan",
-
-  //               message:
-  //                 "You are about to ask for a loan and if you don't pay back, your dog would be eaten. Do you want to go ahead?",
-  //             },
-
-  //             {
-  //               type: "cancel",
-
-  //               label: "Cancel",
-
-  //               message:
-  //                 "If you cancel this, all your breads would be buttered. Are you sure you want to do this?",
-  //             },
-  //           ],
-
-  //           sections: [
-  //             {
-  //               name: "Student details",
-
-  //               description:
-  //                 "Provide the details of the student for which this loan is being taken.",
-
-  //               fields: [
-  //                 {
-  //                   id: "name_of_student",
-
-  //                   name: "Name of student",
-
-  //                   type: "label",
-
-  //                   label: "Student name",
-
-  //                   description:
-  //                     "This is a type of form field for creating different document types",
-  //                 },
-
-  //                 {
-  //                   id: "document_options",
-
-  //                   name: "Document options",
-
-  //                   type: "dropdown",
-
-  //                   label: "What type of IDs do you have",
-
-  //                   description: "Select all the types of ID that your fada has",
-
-  //                   options: [
-  //                     {
-  //                       id: "id1",
-
-  //                       label: "International Passport",
-
-  //                       value: "passport",
-  //                     },
-
-  //                     {
-  //                       id: "id2",
-
-  //                       label: "National ID",
-
-  //                       value: "NIN",
-  //                     },
-  //                   ],
-
-  //                   validation: {
-  //                     required: false,
-
-  //                     multi_select: true,
-  //                   },
-  //                 },
-  //               ],
-  //             },
-
-  //             {
-  //               name: "Upload details",
-
-  //               description:
-  //                 "This is where you will upload different details. This section is used to show how different sections work.",
-
-  //               fields: [
-  //                 {
-  //                   id: "identity_document",
-
-  //                   name: "Identification document",
-
-  //                   type: "upload",
-
-  //                   label: "Upload your ID",
-
-  //                   description:
-  //                     "Kindly upload an ID document that is valid and issued by a government",
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     allowed: "doc,docx,png,pdf,jpg,tiff",
-
-  //                     maximum: "5mb",
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "document_options",
-
-  //                   name: "Document options",
-
-  //                   type: "dropdown",
-
-  //                   label: "What type of IDs do you have",
-
-  //                   description: "Select all the types of ID that your fada has",
-
-  //                   options: [
-  //                     {
-  //                       id: "id1",
-
-  //                       label: "International Passport",
-
-  //                       value: "passport",
-  //                     },
-
-  //                     {
-  //                       id: "id2",
-
-  //                       label: "National ID",
-
-  //                       value: "NIN",
-  //                     },
-  //                   ],
-
-  //                   validation: {
-  //                     required: false,
-
-  //                     multi_select: true,
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "audio_attestation",
-
-  //                   name: "Audio attestation",
-
-  //                   type: "audio",
-
-  //                   label: "Record your voice",
-
-  //                   description:
-  //                     "Please record the audio of your voice so we know you can sing",
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     minimum: "10secs",
-
-  //                     maximum: "30secs",
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "video_attestation",
-
-  //                   name: "Video attestation",
-
-  //                   type: "video",
-
-  //                   label: "Record your video",
-
-  //                   description:
-  //                     "Please record the video of you asking for money",
-
-  //                   validation: {
-  //                     required: true,
-
-  //                     minimum: "10secs",
-
-  //                     maximum: "30secs",
-  //                   },
-  //                 },
-
-  //                 {
-  //                   id: "student_selfie",
-
-  //                   name: "Studend selfie",
-
-  //                   type: "image",
-
-  //                   label: "Take your selfie",
-
-  //                   description:
-  //                     "Please take your selfie against a pure white background",
-
-  //                   validation: {
-  //                     required: true,
-  //                   },
-  //                 },
-  //               ],
-  //             },
-  //           ],
-  //         },
-  //       ],
-  //     });
-  //   }, []);
-
   const getJsonData = function () {
     const data: FormData = JSON.parse(jsonData);
-    console.log(typeof data);
-    console.log(data);
     setForm(data);
-    console.log(form.meta);
+    fillTheForm(data);
   };
 
+  const fillTheForm = function (data) {
+    const dataObject = {};
+    data.pages.map((page) => {
+      page.sections.map((section) => {
+        section.fields.map((field) => {
+          dataObject[field.id] = "";
+        });
+      });
+    });
+  };
+
+  const handleSubmit = () => {
+    const newErrors: Record<string, string> = {};
+
+    form?.pages.forEach((page) => {
+      page.sections.forEach((section) => {
+        section.fields.forEach((field) => {
+          const value = formValues[field.id];
+
+          if (field.validation.required && !value) {
+            newErrors[field.id] = "This field is required.";
+          }
+
+          if (
+            field.validation.minimum &&
+            value &&
+            value.length < Number(field.validation.minimum)
+          ) {
+            newErrors[
+              field.id
+            ] = `Minimum length is ${field.validation.minimum}.`;
+          }
+
+          if (
+            field.validation.maximum &&
+            value &&
+            value.length > Number(field.validation.maximum)
+          ) {
+            newErrors[
+              field.id
+            ] = `Maximum length is ${field.validation.maximum}.`;
+          }
+        });
+      });
+    });
+  };
   return (
     <>
       <h1>Configurable Form</h1>
@@ -573,7 +138,6 @@ export const ConfigForm = () => {
           />
         </label>
         <p>or</p>
-        {/* <pre>{form.meta}</pre> */}
         <textarea
           name=""
           id="jsonData"
@@ -584,58 +148,166 @@ export const ConfigForm = () => {
         ></textarea>
         <button>Submit</button>
       </form>
-      {Object.keys(form).length === 0 ? (
-        <h2>No fetch</h2>
-      ) : (
-        form.pages.map((page) => (
-          <div key={page.name}>
-            <h2>{page.title}</h2>
-            <p>{page.description}</p>
-            {page.sections.map((section) => (
-              <div key={section.name}>
-                <h3>{section.name}</h3>
-                <p>{section.description}</p>
-                {section.fields.map((field) => (
-                  <div key={field.id}>
-                    <label htmlFor={field.id}>{field.label}</label>
-                    {field.type === "short_text" && (
-                      <input
-                        type="text"
-                        id={field.id}
-                        name={field.id}
-                        value={form[field.id] || ""}
-                        onChange={() => {}}
-                      />
-                    )}
-                    {field.type === "long_text" && (
-                      <textarea
-                        id={field.id}
-                        name={field.id}
-                        value={form[field.id] || ""}
-                        onChange={() => {}}
-                      />
-                    )}
-                    {field.type === "date" && (
-                      <input
-                        type="date"
-                        id={field.id}
-                        name={field.id}
-                        value={form[field.id] || ""}
-                        onChange={() => {}}
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-            ))}
-            {page.actions.map((action) => (
-              <button key={action.label} type="button">
-                {action.label}
-              </button>
-            ))}
-          </div>
-        ))
-      )}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <button
+          onClick={() => {
+            setFormValues(jsonObj);
+          }}
+        >
+          fill form
+        </button>
+        {Object.keys(form).length === 0 ? (
+          <h2>No fetch</h2>
+        ) : (
+          form.pages.map((page) => (
+            <div key={page.name}>
+              <h2>{page.title}</h2>
+              <p>{page.description}</p>
+              {page.sections.map((section) => (
+                <div key={section.name}>
+                  <h3>{section.name}</h3>
+                  <p>{section.description}</p>
+                  {section.fields.map((field) => (
+                    <div key={field.id}>
+                      {field.type === "short_text" && (
+                        <InputField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "long_text" && (
+                        <TextAreaField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "date" && (
+                        <DateField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "date_time" && (
+                        <DateField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "time" && (
+                        <TimeField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "number" && (
+                        <NumberField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "integer" && (
+                        <NumberField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "phone" && (
+                        <PhoneField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "email" && (
+                        <EmailField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "label" && (
+                        <InputField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "checkbox" && (
+                        <CheckboxField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "radio" && (
+                        <RadioField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "audio" && (
+                        <AudioField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "video" && (
+                        <VideoField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "image" && (
+                        <ImageField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "upload" && (
+                        <UploadField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                      {field.type === "dropdown" && (
+                        <DropdownField
+                          field={field}
+                          value={formValues[field.id] || ""}
+                          onChange={handleChange}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ))}
+              {page.actions.map((action) => (
+                <button key={action.label} type="button">
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          ))
+        )}
+      </form>
     </>
   );
 };
+
+export default ConfigForm;
